@@ -157,7 +157,7 @@ def table(req):
     writer = csv.writer(response)
     for entry in restaurant_array:
         writer.writerow(entry.values())
-    return render(req, 'table.html', {'table': restaurant_array, 'reviews': review_array})
+    return render(req, 'index.html', {'table': restaurant_array, 'reviews': review_array})
 
 # def graph(req):
 #     return render_to_response(req, 'graph.html',)
