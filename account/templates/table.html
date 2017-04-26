@@ -3,9 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Data Table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Data Report</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+ 
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+ 
+
     {% load static %}
 </head>
 <style>
@@ -19,12 +26,12 @@
 
   }
    table, th, td {
-       border: 1px solid black;
+       /*border: 1px solid black;*/
    }
    tr:nth-child(even) {background: #CCC}
    tr:nth-child(odd) {background: #FFF}
 </style>
-<body style="background-color: #2F3446;">
+<body style="background-color: #F3F3F4;">
 <!-- 	<img src = "img/SBD_logo.png" alt="Slim by Design logo">
  -->    <div style="width: 920px; height: 500px; text-align: center; font-family: sans-serif; padding-top: 50px; margin: auto; border-radius: 4px;">
             Restaurants
@@ -105,6 +112,15 @@
         } );
     } );
 </script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 
 
 
