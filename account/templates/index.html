@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
 </head>
 <style>
 
@@ -5152,7 +5154,9 @@ body.skin-3 {
 
 
 </style>
-<body >
+</head>
+<body>
+
 <div>
 	<h1 style="text-align: center; color: #ffffff;">Welcome {{username}} !</h1>
 <!-- <br>
@@ -5213,7 +5217,7 @@ body.skin-3 {
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                           <div class="table-responsive"  id="data-table">
-                              <table id = "Restaurant_Table" class="table table-striped" align ="center">
+                              <table id = "restaurantTable" class="table table-striped" align ="center">
                                 <tr>
                                     <th>City</th>
                                     <th>Name</th>
@@ -5232,9 +5236,12 @@ body.skin-3 {
                                 {% endfor %}
                             </table>
                             <br>
+                              <button id = 'ExportRestaurants'>
+                                  Export Restaurants
+                              </button>
                             <br>
                             Reviews
-                            <table class="table table-striped" align ="center">
+                            <table id ="reviewTable" class="table table-striped" align ="center">
                                 <tr>
                                     <th>Date</th>
                                     <th>Time</th>
@@ -5296,6 +5303,7 @@ body.skin-3 {
 
 
     <!-- Mainly scripts -->
+    <script src=“https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js“></script>
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -5309,18 +5317,11 @@ body.skin-3 {
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
 
-
-
+    <script>
+        $(document).ready(function(){
+           $(‘#restaurantTable’).DataTable();
+        });
     </script>
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
