@@ -4,6 +4,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from account.models import User
+
+from django import forms
 from firebase import firebase
 import csv
 
@@ -15,15 +17,17 @@ auth=firebase.FirebaseAuthentication(secret,"slimbydesignapp@gmail.com")
 db.authentication = auth
 
 # Create your views here.
-class UserForm(forms.Form):
-    username = forms.CharField(label='username:',max_length=100)
-    password = forms.CharField(label='password:',widget=forms.PasswordInput())
-    email = forms.EmailField(label='email:')
+# class UserForm(forms.Form):
+#     username = forms.CharField(label='username:',max_length=100)
+#     password = forms.CharField(label='password:',widget=forms.PasswordInput())
     # widget = forms.PasswordInput())
+class UserForm(forms.Form):
+    username = forms.CharField(label='username:', max_length=100)
+    password = forms.CharField(label='password:', widget=forms.PasswordInput())
 
-class UserLoginForm(forms.Form):
-    username = forms.CharField(label='username:',max_length=100)
-    password = forms.CharField(label='password:',widget=forms.PasswordInput())
+# class UserLoginForm(forms.Form):
+#     username = forms.CharField(label='username:',max_length=100)
+#     password = forms.CharField(label='password:',widget=forms.PasswordInput())
 
 class FilterForm(forms.Form):
     name = forms.CharField(label='Name:',max_length=100)
@@ -33,69 +37,86 @@ class FilterForm(forms.Form):
     city = forms.CharField(label='City:',max_length=100)
     state = forms.CharField(label='State:',max_length=100)
 
-def register(request):
-    if request.method == "POST":
+# def register(request):
+#     if request.method == "POST":
+#         uf = UserForm(request.POST)
+#         if uf.is_valid():
+#             #Get the information from form
+#             username = uf.cleaned_data['username']
+#             password = uf.cleaned_data['password']
+#             email = uf.cleaned_data['email']
+#             #Write data to the database
+#             user = User()
+#             user.username = username
+#             user.password = password
+#             user.email = email
+#             user.save()
+#             #return the success.html
+#             return render(request, 'success.html',{'username':username})
+#     else:
+#         uf = UserForm()
+#         return render(request, 'register.html',{'uf':uf})
+
+# def login(req):
+#     if req.method == 'POST':
+#         uf = UserLoginForm(req.POST)
+#         if uf.is_valid():
+#             #Get the username and password of form
+#             username = uf.cleaned_data['username']
+#             password = uf.cleaned_data['password']
+#             #Compare the username and password of form with the account data in database
+#             user = User.objects.filter(username__exact = username,password__exact = password)
+#             if user:
+#                 #If success, return to the index.html
+#                 response = HttpResponseRedirect('/account/index/')
+#                 #write the username into cookie, the duration time is 3600 s
+#                 response.set_cookie('username',username,3600)
+#                 return response
+#             else:
+#                 #If the username is invalid, still stay at the login.html
+#                 return HttpResponseRedirect('/account/ErrorMessageAfterLogin/')
+#     else:
+#         uf = UserLoginForm()
+#     return render(req, 'login.html',{'uf':uf})
+
+def login(request):
+    if request.method == 'POST':
         uf = UserForm(request.POST)
         if uf.is_valid():
-            #Get the information from form
+       
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
-            email = uf.cleaned_data['email']
-            #Write data to the database
-            user = User()
-            user.username = username
-            user.password = password
-            user.email = email
-            user.save()
-            #return the success.html
-            return render(request, 'success.html',{'username':username})
+          
+            user = User.objects.filter(username__exact = username,password__exact = password)
+            if user:
+                return render(request,'index.html',{'username':username})
+            else:
+                return render(request,'fail.html',{'username':username})
     else:
         uf = UserForm()
-        return render(request, 'register.html',{'uf':uf})
+    return render(request,'login.html',{'uf':uf})
 
-def login(req):
-    if req.method == 'POST':
-        uf = UserLoginForm(req.POST)
-        if uf.is_valid():
-            #Get the username and password of form
-            username = uf.cleaned_data['username']
-            password = uf.cleaned_data['password']
-            #Compare the username and password of form with the account data in database
-            user = User.objects.filter(username__exact = username,password__exact = password)
-            if user:
-                #If success, return to the index.html
-                response = HttpResponseRedirect('/account/index/')
-                #write the username into cookie, the duration time is 3600 s
-                response.set_cookie('username',username,3600)
-                return response
-            else:
-                #If the username is invalid, still stay at the login.html
-                return HttpResponseRedirect('/account/ErrorMessageAfterLogin/')
-    else:
-        uf = UserLoginForm()
-    return render(req, 'login.html',{'uf':uf})
-
-def ErrorMessageAfterLogin(req):
-    if req.method == 'POST':
-        uf = UserLoginForm(req.POST)
-        if uf.is_valid():
-            #Get the username and password of form
-            username = uf.cleaned_data['username']
-            password = uf.cleaned_data['password']
-            #Compare the username and password of form with the account data in database
-            user = User.objects.filter(username__exact = username,password__exact = password)
-            if user:
-                #If success, return to the index.html
-                response = HttpResponseRedirect('/account/index/')
-                #write the username into cookie, the duration time is 3600 s
-                response.set_cookie('username',username,3600)
-                return response
-            else:
-                #If the username is invalid, still stay at the login.html
-                return HttpResponseRedirect('/account/ErrorMessageAfterLogin/')
-    else:
-        uf = UserLoginForm()
-    return render(req, 'ErrorMessageAfterLogin.html',{'uf':uf})
+# def ErrorMessageAfterLogin(req):
+#     if req.method == 'POST':
+#         uf = UserLoginForm(req.POST)
+#         if uf.is_valid():
+#             #Get the username and password of form
+#             username = uf.cleaned_data['username']
+#             password = uf.cleaned_data['password']
+#             #Compare the username and password of form with the account data in database
+#             user = User.objects.filter(username__exact = username,password__exact = password)
+#             if user:
+#                 #If success, return to the index.html
+#                 response = HttpResponseRedirect('/account/index/')
+#                 #write the username into cookie, the duration time is 3600 s
+#                 response.set_cookie('username',username,3600)
+#                 return response
+#             else:
+#                 #If the username is invalid, still stay at the login.html
+#                 return HttpResponseRedirect('/account/ErrorMessageAfterLogin/')
+#     else:
+#         uf = UserLoginForm()
+#     return render(req, 'ErrorMessageAfterLogin.html',{'uf':uf})
 
 #successful login
 def index(req):
