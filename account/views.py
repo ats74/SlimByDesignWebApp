@@ -180,6 +180,23 @@ def table(req):
         writer.writerow(entry.values())
     return render(req, 'index.html', {'table': restaurant_array, 'reviews': review_array})
 
+def restaurant(req):
+    restaurants = db.get('/establishments', None)
+    restaurant_array = [None] * len(restaurants)
+
+    i = 0
+    for key, value in restaurants.items():
+        x = {}
+        x['city'] = value['city']
+        x['name'] = value['name']
+        x['numRates'] = value['numRates']
+        x['rating'] = value['rating']
+        x['type'] = value['type']
+        restaurant_array[i] = x
+        i+=1
+
+    return render(req, 'restaurant.html', {'table': restaurant_array})
+
 # def graph(req):
 #     return render_to_response(req, 'graph.html',)
 
