@@ -10,5 +10,6 @@ urlpatterns =          [url(r'^$', views.login, name='login'),
                        url(r'^filter/$', views.filter, name = 'filter'),
                        url(r'^table/$', views.table, name = 'table'),
                        # url(r'^graph/$', views.graph, name='graph'),
-                       url(r'^restaurant/$', views.restaurant, name = 'restaurant')
+                       url(r'^restaurant/$', views.restaurant, name = 'restaurant'),
+                       url(r'^restaurant_csv/$', views.restaurant_csv, name = 'restaurant_csv')
                        ]

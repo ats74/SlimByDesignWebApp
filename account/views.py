@@ -16,6 +16,11 @@ secret="gbuTPGUqQPtUJf7jD3eJ14olWj33eGB59MIXaCvA"
 auth=firebase.FirebaseAuthentication(secret,"slimbydesignapp@gmail.com")
 db.authentication = auth
 
+restaurants = db.get('/establishments', None)
+restaurant_array = [None] * len(restaurants)
+reviews = db.get('/reviews', None)
+review_array = [None] * len(reviews)
+
 # Create your views here.
 # class UserForm(forms.Form):
 #     username = forms.CharField(label='username:',max_length=100)
@@ -135,10 +140,6 @@ def filter(req):
     return render(req, 'filter.html',{'uf':uf})
 
 def table(req):
-    restaurants = db.get('/establishments', None)
-    reviews = db.get('/reviews', None)
-    restaurant_array = [None] * len(restaurants)
-    review_array = [None] * len(reviews)
     i = 0
     for key, value in restaurants.items():
         x = {}
@@ -181,9 +182,6 @@ def table(req):
     return render(req, 'index.html', {'table': restaurant_array, 'reviews': review_array})
 
 def restaurant(req):
-    restaurants = db.get('/establishments', None)
-    restaurant_array = [None] * len(restaurants)
-
     i = 0
     for key, value in restaurants.items():
         x = {}
@@ -194,9 +192,22 @@ def restaurant(req):
         x['type'] = value['type']
         restaurant_array[i] = x
         i+=1
-
+    print('test2')
     return render(req, 'restaurant.html', {'table': restaurant_array})
 
+def restaurant_csv(req):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="test.csv"'
+
+    writer = csv.writer(response)
+    if (restaurant_array[0] is not None ):
+        for entry in restaurant_array:
+            writer.writerow(entry.values())
+        return response
+    else :
+        restaurant(req)
+        print('test')
+        return HttpResponseRedirect('../restaurant')
 # def graph(req):
 #     return render_to_response(req, 'graph.html',)
 
