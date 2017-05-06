@@ -11,5 +11,7 @@ urlpatterns =          [url(r'^$', views.login, name='login'),
                        url(r'^table/$', views.table, name = 'table'),
                        # url(r'^graph/$', views.graph, name='graph'),
                        url(r'^restaurant/$', views.restaurant, name = 'restaurant'),
-                       url(r'^restaurant_csv/$', views.restaurant_csv, name = 'restaurant_csv')
+                       url(r'^restaurant_csv/$', views.restaurant_csv, name = 'restaurant_csv'),
+                       url(r'^review/$', views.review, name = 'review'),
+                       url(r'^review_csv/$', views.review_csv, name = 'review_csv')
                        ]

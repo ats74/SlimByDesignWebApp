@@ -192,22 +192,59 @@ def restaurant(req):
         x['type'] = value['type']
         restaurant_array[i] = x
         i+=1
-    print('test2')
     return render(req, 'restaurant.html', {'table': restaurant_array})
+
+def review(req):
+    i = 0
+    for key, value in reviews.items():
+        x = {}
+        x['date'] = value['date']
+        x['time'] = value['time']
+        x['day'] = value['day']
+        x['city'] = value['city']
+        x['name'] = value['name']
+        x['rating'] = value['rating']
+        x['type'] = value['type']
+        x['answer1'] = value['answer1']
+        x['answer2'] = value['answer2']
+        x['answer3'] = value['answer3']
+        x['answer4'] = value['answer4']
+        x['answer5'] = value['answer5']
+        x['answer6'] = value['answer6']
+        x['answer7'] = value['answer7']
+        x['answer8'] = value['answer8']
+        x['answer9'] = value['answer9']
+        x['answer10'] = value['answer10']
+        review_array[i] = x
+        i+=1
+    return render(req, 'review.html', {'table': review_array})
 
 def restaurant_csv(req):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="test.csv"'
+    response['Content-Disposition'] = 'attachment; filename="restaurant_data.csv"'
 
     writer = csv.writer(response)
+    writer.writerow(['City', 'Name', 'Number of Ratings', 'Rating', 'Type'])
     if (restaurant_array[0] is not None ):
         for entry in restaurant_array:
             writer.writerow(entry.values())
         return response
     else :
         restaurant(req)
-        print('test')
         return HttpResponseRedirect('../restaurant')
+
+def review_csv(req):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="review_data.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['Date', 'Time', 'Day', 'City', 'Name', 'Rating', 'Type', 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10'])
+    if (review_array[0] is not None):
+        for entry in review_array:
+            writer.writerow(entry.values())
+        return response
+    else:
+        review(req)
+        return HttpResponseRedirect('../review')
 # def graph(req):
 #     return render_to_response(req, 'graph.html',)
 
