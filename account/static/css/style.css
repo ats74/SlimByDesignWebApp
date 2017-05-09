@@ -2,6 +2,7 @@
 
 
 
+
 #data-table{
   max-height: 500px;
   overflow: auto;
@@ -447,7 +448,7 @@ body.fixed-sidebar.mini-navbar #page-wrapper {
   margin: 0 0 0 0px;
 }
 body.body-small.fixed-sidebar.mini-navbar #page-wrapper {
-  margin: 0 0 0 220px;
+  margin: 0 0 0 50px;
 }
 body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
   width: 220px;
@@ -2934,7 +2935,7 @@ video {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 240px;
+    margin: 0 0 0 0px;
     min-height: 1000px;
   }
 }
@@ -4366,7 +4367,7 @@ body.rtls {
   /* Theme config */
 }
 body.rtls #page-wrapper {
-  margin: 0 220px 0 0;
+  margin: 0 0 0 0;
 }
 body.rtls .nav-second-level li a {
   padding: 7px 35px 7px 10px;
