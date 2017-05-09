@@ -13,5 +13,8 @@ urlpatterns =          [url(r'^$', views.login, name='login'),
                        url(r'^restaurant/$', views.restaurant, name = 'restaurant'),
                        url(r'^restaurant_csv/$', views.restaurant_csv, name = 'restaurant_csv'),
                        url(r'^review/$', views.review, name = 'review'),
-                       url(r'^review_csv/$', views.review_csv, name = 'review_csv')
+                       url(r'^review_csv/$', views.review_csv, name = 'review_csv'),
+                       url(r'^home/$', views.home, name = 'home'),
+                       url(r'^home_csv/$', views.home_csv, name = 'home_csv'),
+
                        ]

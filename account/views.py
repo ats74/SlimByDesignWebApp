@@ -20,6 +20,8 @@ restaurants = db.get('/establishments', None)
 restaurant_array = [None] * len(restaurants)
 reviews = db.get('/reviews', None)
 review_array = [None] * len(reviews)
+homes = db.get('/home', None)
+home_array = [None] * len(homes)
 
 # Create your views here.
 # class UserForm(forms.Form):
@@ -219,6 +221,31 @@ def review(req):
         i+=1
     return render(req, 'review.html', {'table': review_array})
 
+def home(req):
+    i = 0
+    for key, value in homes.items():
+        x = {}
+        x['date'] = value['date']
+        x['time'] = value['time']
+        x['day'] = value['day']
+        x['city'] = value['city']
+        x['rating'] = value['rating']
+        x['type'] = value['type']
+        x['answer1'] = value['answer1']
+        x['answer2'] = value['answer2']
+        x['answer3'] = value['answer3']
+        x['answer4'] = value['answer4']
+        x['answer5'] = value['answer5']
+        x['answer6'] = value['answer6']
+        x['answer7'] = value['answer7']
+        x['answer8'] = value['answer8']
+        x['answer9'] = value['answer9']
+        x['answer10'] = value['answer10']
+        home_array[i] = x
+        i+=1
+    return render(req, 'home.html', {'table':home_array})
+
+
 def restaurant_csv(req):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="restaurant_data.csv"'
@@ -245,6 +272,21 @@ def review_csv(req):
     else:
         review(req)
         return HttpResponseRedirect('../review')
+
+def home_csv(req):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="home_data.csv"'
+        writer = csv.writer(response)
+        writer.writerow(
+            ['Date', 'Time', 'Day', 'City', 'Rating', 'Type', 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8',
+             'Q9', 'Q10'])
+        if (home_array[0] is not None):
+            for entry in home_array:
+                writer.writerow(entry.values())
+            return response
+        else:
+            home(req)
+            return HttpResponseRedirect('../home')
 # def graph(req):
 #     return render_to_response(req, 'graph.html',)
 
