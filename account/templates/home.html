@@ -104,7 +104,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Review Data</h1>
+                    <h1 class="page-header">Home Data</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -142,9 +142,9 @@
                                     <th>Q14</th>
                                 </tr>
                             </thead>
-                             <tbody>
+                            <tbody>
                             {% for item in table %}
-                           
+                            
                                 <tr>
                                     <td>{{ item.date }}</td>
                                     <td>{{ item.time }}</td>
@@ -168,9 +168,9 @@
                                     <td>{{ item.answer13 }}</td>
                                     <td>{{ item.answer14 }}</td>
                                 </tr>
-                           
+                            
                             {% endfor %}
-                             </tbody>
+                            </tbody>
                         </table>
 
                            
@@ -221,14 +221,10 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
 
-
-    $(document).ready(function(){
+     $(document).ready(function(){
      $('#dataTables-example').DataTable();
 
     });
-
-
-
 
 
     </script>
