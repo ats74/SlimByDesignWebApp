@@ -96,7 +96,7 @@ def login(request):
           
             user = User.objects.filter(username__exact = username,password__exact = password)
             if user:
-                return render(request,'index.html',{'username':username})
+                return render(request,'review.html')
             else:
                 return render(request,'fail.html',{'username':username})
     else:
@@ -128,7 +128,7 @@ def login(request):
 #successful login
 def index(req):
     username = req.COOKIES.get('username','')
-    return render(req, 'index.html' ,{'username':username})
+    return render(req, 'review.html' ,{'username':username})
 
 #Logout
 def logout(req):

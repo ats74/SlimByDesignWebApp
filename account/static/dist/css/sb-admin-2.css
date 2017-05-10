@@ -3,6 +3,9 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+
+
+
 body {
   background-color: #f8f8f8;
 }
@@ -165,6 +168,7 @@ body {
 .chat-panel .panel-body {
   height: 350px;
   overflow-y: scroll;
+}
 }
 .login-panel {
   margin-top: 25%;
