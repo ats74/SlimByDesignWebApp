@@ -96,7 +96,7 @@ def login(request):
           
             user = User.objects.filter(username__exact = username,password__exact = password)
             if user:
-                return render(request, 'review.html', {'table': review_array})
+                return HttpResponseRedirect('/account/review/')
             else:
                 return render(request,'fail.html',{'username':username})
     else:
